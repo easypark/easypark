@@ -1,0 +1,5 @@
+@CHARSET "ISO-8859-1";
+@import "/path/to/bootstrap/less/variables";
+@import "/path/to/bootstrap-datetimepicker/src/less/bootstrap-datetimepicker-build.less";
+
+<link rel="stylesheet" href="/path/to/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />

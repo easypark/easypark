@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <title>Inscription</title>
 <meta charset="utf-8">
@@ -11,13 +12,13 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="/resources/ajouter_place.css">	
 	
-	
+	<link rel="stylesheet" type="text/css" href="formulaire_inscription.css">	
 </head>
+
 <body>
 
-	<!-- Navigation -->
+<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top ">
 		<div class="container-fluid" >
 
@@ -48,78 +49,75 @@
 		</div>
 	</nav>
 	
-<!-- Ajouter une place -->
+	
+	
+<!--Formulaire -->
 
-<section id="ajouterplace">
+    <section id="inscription1">
+
 	<div class="container">
-
-		<h1>Ajouter une place</h1>
-
-		<form role="form">
-
-			<div class="form-group">
-				<label for="nameplace">Nom de la place:</label> <input type="text"
-					class="form-control" id="nameplace"
-					placeholder="Visible uniquement par vous">
+	<h1>Inscription</h1>
+		<form role="form" action="adduser" method="POST">
+		
+			<div class="form-group" >
+			
+				<label for="lastname">Nom:</label> <input type="text" NAME="name"
+					class="form-control" id="lastname"
+					placeholder="Entrez votre nom">
 			</div>
 
 			<div class="form-group">
-				<label for="adress">Adresse:</label> <input type="text"
-					class="form-control" id="adress"
-					placeholder="Entrez l'adresse de votre place">
+				<label for="firstname">Prénom:</label> <input type="text" NAME="firstname"
+					class="form-control" id="firstname"
+					placeholder="Entrez votre prénom">
 			</div>
 
 			<div class="form-group">
-				<label for="ville">Ville:</label> <input type="text"
-					class="form-control" id="ville"
-					placeholder="Entrez la ville où se situe votre place">
+				<label for="email">Adresse email:</label> <input type="email"
+					class="form-control" NAME="email" id="email" placeholder="Entrez votre adresse email">
 			</div>
 
 			<div class="form-group">
-				<label for="superficie">Superficie:</label> <input type="text"
-					class="form-control" id="superficie"
-					placeholder="Entrez la superficie de votre place">
+				<label for="pwd">Mot de passe:</label> <input type="password"
+					class="form-control" NAME="password"id="pwd" placeholder="Entrez votre mot de passe">
 			</div>
 
 			<div class="form-group">
-				<label for="color">Disponibilités:</label> <input type="text"
-					class="form-control" id="color" placeholder="Calendrier + Horaires">
+				<label for="confirm">Confirmation:</label> <input
+					type="password" class="form-control" id="confirm"
+					placeholder="Confirmez votre mot de passe">
 			</div>
 
-			<div class="form-group">
-				<label for="comm">Commentaires:</label>
-				<textarea class="form-control" id="comm" rows="3"></textarea>
-			</div>
 			
 			<div class="form-group">
-				<label for="parking">Photo du parking</label> <input type="file"
-					id="parking">
+			<label for="photo">Photo de profil</label>
+			<input type="file" id="photo">
+			</div>
+			
+			<div class="checkbox">
+				<label><input type="checkbox"> J'accepte les conditions d'utilisation du site Internet </label>
 			</div>
 
 			<div>
-				<ul class="pagination">
-					<li><a href="#">1</a></li>
-					<li class="active"><a href="#">2</a></li>
-				</ul>
-			</div>
-
-			<div>
-				 
-				<button type="submit" class="btn btn-info btn-md">Valider</button>
-				<button type="submit" class="btn btn-info btn-md">Retourner à
-					l'étape précédente</button>
-					
+			<ul class="pagination">
+				<li class="active"><a href="#">1</a></li>
+				<li><a href="ajouter_place.html">2</a></li>
+			</ul>
 			</div>
 			
-			<div id="test11">
-			<a href="rediriger">Vous souhaitez également emprunter une place ? Cliquez ici pour rentrer votre véhicule </a>
+			<div>
+			<button type="submit" class="btn btn-info btn-md">Valider</button>
+			<button type="submit" class="btn btn-info btn-md">Retour à l'accueil</button>
 			</div>
 			
 		</form>
+		
 	</div>
-</section>
-
- <!-- Footer -->
+	
+	</section>
+	
+	
+	<!-- Footer -->
     <footer>
     <nav class="navbar navbar-inverse" id="footeressai">
         <div class="container">
@@ -132,6 +130,6 @@
             </div>
         </div>
     </footer>
-    
+
 </body>
 </html>

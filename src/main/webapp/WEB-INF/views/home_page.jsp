@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +16,11 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="home_page.css">
+<link rel="stylesheet" type="text/css" href="/resources/home_page.css">
 
 </head>
 
-<body>
+<body><br><br><br>
 
 <script src="myFirstScript.js" type="text/javascript"> </script>
 
@@ -39,19 +40,35 @@
 
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right"></ul>
-
+  
+			 	
+			
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>   Inscription</a>
+					<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
 					<ul class="dropdown-menu">
-            			<li><a href="formulaire_inscription.html">En tant que particulier</a></li>
-            			<li><a href="formulaire_inscription.html">En tant que entreprise</a></li>
+            			<li><a href="inscription?structur=0">En tant que particulier</a></li>
+            			<li><a href="inscription?structur=1">En tant que entreprise</a></li>
           			</ul>
 				</li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>    Se connecter</a></li>
-				</ul>
+				
+						 
+				
+		
+			<c:choose>
+      <c:when test="${loggedUser.email==null}">
+		<li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span>    Se connecter</a></li>
 
+      <br />
+      </c:when>
+
+      <c:otherwise> <li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span>    ${loggedUser.name}</a></li>
+      <br />
+      </c:otherwise>
+</c:choose>
+</ul>
 			</div>
 		</div>
+	
 	</nav>
 	
 	
@@ -118,7 +135,7 @@
                 
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                 <button type="button" class="btn btn-info btn-lg">Je prête un parking</button>
+                 <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='/easypark/ajouter_place'">Je prête un parking</button>
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
                 
@@ -143,7 +160,7 @@
             <div class="row">
             
                <div class="col-lg-12 text-center">
-                        <img class=" img-circle" src="images/geektonic.png" alt=""   >
+                        <img class=" img-circle" src="/resources/images/geektonic.png" alt=""   >
                         <h4 class="section-subheading text-muted">VERT TONIC.</h4>
                         <p class="text-muted">Designers & Développeurs</p>
                </div>

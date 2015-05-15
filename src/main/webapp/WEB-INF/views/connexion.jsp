@@ -17,7 +17,7 @@
    <button type="button"  onclick="window.location.href='/easypark/disconnect'">Deconnexion</button>
 <br>
 logged id:
- ${loggedUser.email}
-<a href=''>home page</a>
+<%= session.getAttribute( "id_user" ) %>
+<a href='home'>home page</a>
 </body>
 </html>

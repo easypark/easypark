@@ -11,6 +11,7 @@ public class ParkingLot implements Serializable {
 	int horaires;
 	String type;
 	String commentaire;
+	int id_user;
 	
 
 	@Override
@@ -20,6 +21,12 @@ public class ParkingLot implements Serializable {
 				+ horaires + ", type=" + type + ", commentaire=" + commentaire
 				+ "]";
 	}
+	public ParkingLot() {
+		super();
+		this.horaires = 0;
+		this.id_user = 0;
+	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -61,6 +68,12 @@ public class ParkingLot implements Serializable {
 	}
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
+	}
+	public int getId_user() {
+		return id_user;
+	}
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
 	}
 
 }

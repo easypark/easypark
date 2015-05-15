@@ -5,23 +5,19 @@ import java.io.Serializable;
 
 
 public class User implements Serializable{
-
+	
+	int id;
 	String email;
 	String password;
-	String name;
-	String firstname;
+
 	
-	public String getName() {
-		return name;
+	
+	
+	public int getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getFirstname() {
-		return firstname;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getEmail() {
 		return email;

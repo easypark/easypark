@@ -62,7 +62,7 @@
 			<div class="form-group" >
 			
 				<label for="lastname">Nom:</label> <input type="text" NAME="name"
-					class="form-control" id="lastname"
+					class="form-control" id="name"
 					placeholder="Entrez votre nom">
 			</div>
 

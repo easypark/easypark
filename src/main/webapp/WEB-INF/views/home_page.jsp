@@ -44,24 +44,26 @@
 			 	
 			
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
+				
+	
+		
+			<c:choose>
+			
+			
+      <c:when test="${session.getAttribute('email').equals(null)}">
+      	<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
 					<ul class="dropdown-menu">
             			<li><a href="inscription?structur=0">En tant que particulier</a></li>
             			<li><a href="inscription?structur=1">En tant que entreprise</a></li>
           			</ul>
 				</li>
-				
-						 
-				
-		
-			<c:choose>
-      <c:when test="${loggedUser.email==null}">
 		<li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span>    Se connecter</a></li>
 
       <br />
       </c:when>
 
-      <c:otherwise> <li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span>    ${loggedUser.name}</a></li>
+      <c:otherwise> <li><a href="mon_profil">    <%= session.getAttribute( "email" ) %></a></li>
+ <li><a href="connexion">Se déconnecter</a></li>
       <br />
       </c:otherwise>
 </c:choose>
@@ -103,7 +105,7 @@
       		<input type="text" class="form-control" id="when" placeholder="Entrez une date">
       		<span class="glyphicon glyphicon-calendar"></span> 
     	</div>	
-			<a href="#" class="btn btn-info btn-lg">
+			<a href="rechercher_place" class="btn btn-info btn-lg">
 			<span class="glyphicon glyphicon-search"></span> Rechercher</a>
 			<a href="#" class="btn btn-info btn-md">
 			<span class="glyphicon glyphicon-search"></span> Recherche avancÃ©e</a>
@@ -128,7 +130,7 @@
         
          <div class="row text-center">
                 <div class="col-md-4">
-                <button type="button" class="btn btn-info btn-lg">Je veux un parking</button>
+                <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='/easypark/rechercher_place'">Je veux un parking</button>
                     
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>

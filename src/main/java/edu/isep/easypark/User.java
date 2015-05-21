@@ -32,4 +32,10 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
+	public boolean islogged(){
+		
+		
+		return true;
+	}
+	
 }

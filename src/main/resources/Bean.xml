@@ -16,6 +16,8 @@
 <property name="dataSource" ref="dataSource"/>
 </bean>
 
-
+<bean id="easyparkDAOpl" class="edu.isep.easypark.ParkingLotDAOimpl">
+<property name="dataSource" ref="dataSource"/>
+</bean>
 
 </beans>

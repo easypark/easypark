@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class ParkingLot implements Serializable {
 
+	int id;
 	String nom;
 	String ville;
 	String adresse;
@@ -21,6 +22,15 @@ public class ParkingLot implements Serializable {
 				+ horaires + ", type=" + type + ", commentaire=" + commentaire
 				+ "]";
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public ParkingLot() {
 		super();
 		this.horaires = 0;

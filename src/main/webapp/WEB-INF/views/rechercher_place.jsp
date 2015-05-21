@@ -27,7 +27,8 @@
 			<c:forEach var="record" items="${list}">
 				<tr>
 					<tr>
-					<td>${record.nom}</td>
+					
+					<td><a href="place?id_place=${record.id}">${record.nom}</a> </td>
 					<td>${record.ville}</td>
 					<td>${record.commentaire}</td>
 					<td><a href="page_utilisateur?id_user=${record.id_user}".${record.id_user}>${record.id_user}</a></td>

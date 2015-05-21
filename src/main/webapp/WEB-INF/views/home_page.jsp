@@ -46,12 +46,13 @@
 				<ul class="nav navbar-nav navbar-right">
 				
 	
-		
-			<c:choose>
-			
-			
-      <c:when test="${session.getAttribute('email').equals(null)}">
-      	<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
+	
+<c:catch var ="catchException">
+   <% session.getAttribute("id_user").getClass();%>
+</c:catch>
+
+<c:if test = "${catchException != null}">
+   	<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
 					<ul class="dropdown-menu">
             			<li><a href="inscription?structur=0">En tant que particulier</a></li>
             			<li><a href="inscription?structur=1">En tant que entreprise</a></li>
@@ -60,13 +61,15 @@
 		<li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span>    Se connecter</a></li>
 
       <br />
-      </c:when>
-
-      <c:otherwise> <li><a href="mon_profil">    <%= session.getAttribute( "email" ) %></a></li>
- <li><a href="connexion">Se déconnecter</a></li>
+</c:if>
+<c:if test  = "${catchException == null}">
+<li><a href="mon_profil">    <%= session.getAttribute("user")%></a></li>
+ <li><a href="disconnect">Se déconnecter</a></li>
       <br />
-      </c:otherwise>
-</c:choose>
+</c:if>
+		
+		
+			
 </ul>
 			</div>
 		</div>

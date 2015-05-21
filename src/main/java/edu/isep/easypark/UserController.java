@@ -94,4 +94,9 @@ public class UserController {
 		return "mon_profil";
 	}
 
+	public boolean isLoggedIn(){
+		return true;
+	}
+	
+	
 }

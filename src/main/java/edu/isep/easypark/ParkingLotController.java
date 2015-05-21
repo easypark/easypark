@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +24,7 @@ public class ParkingLotController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 	private DAOimpl dao;
+	private ParkingLotDAOimpl dao2;
 
 	public ParkingLotController() throws SQLException {
 
@@ -29,7 +32,7 @@ public class ParkingLotController {
 				"/Bean.xml");
 
 		dao = (DAOimpl) context.getBean("easyparkDAO");
-
+		dao2 = (ParkingLotDAOimpl) context.getBean("easyparkDAOpl");
 	}
 	
 
@@ -89,6 +92,37 @@ public class ParkingLotController {
 		return "ajouter_place";
 	}
 
+	@RequestMapping(value = "/place", method = RequestMethod.GET)
+	public String home(@RequestParam("id_place") int id_place , Model model, HttpSession session) {
+		
+		ParkingLot parkingLot= dao2.getPlaceInf(id_place);
+		
+		User user = (User) session.getAttribute("user");
+		
+		logger.info("Testing session stuff " + user.id);
+		
+		if(user.id==parkingLot.id_user){
+			
+			model.addAttribute("action", "<a href='#'>Modifier les information de votre place</a>");
+		}
+		else{
+			model.addAttribute("action", "demander une reservation");
+
+		}
+		
+		model.addAttribute("place", parkingLot);
+		model.addAttribute("id_place", id_place);
+		
+		return "place";
+		
+		
+		
+	}
 	
+	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
+	public String testCalendar(Locale locale, Model model) {
+
+		return "testCalendar";
+	}
 	
 }

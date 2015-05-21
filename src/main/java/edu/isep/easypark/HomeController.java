@@ -38,7 +38,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model,HttpSession session) {
+		
+		logger.info("Trying to connect with id  " + session.getAttribute("id_user"));
+
 		return "home_page";
 	}
 
@@ -64,9 +67,10 @@ public class HomeController {
 			logger.info("user id? " + user.id);
 			session.setAttribute("id_user", user.id);
 			session.setAttribute("email", user.email);
+			session.setAttribute("user",user);
 		}
 
-		return "connexion";
+		return "home_page";
 	}
 
 	@RequestMapping(value = "/disconnect")
@@ -74,12 +78,11 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView();
 		logger.info("Trying to disconnect ");
 
-		session.setAttribute("id_user", null);
-		session.setAttribute("email", null);
 
+		session.invalidate();
 		User voidUser = new User();
 
-		return "connexion";
+		return "home_page";
 	}
 
 }

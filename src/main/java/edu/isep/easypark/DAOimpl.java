@@ -18,9 +18,22 @@ public class DAOimpl {
 
 	public List<ParkingLot> fillParkingLot() {
 
+		String orderby ="note";
+		String sort ="DESC";
+		String sql = "select * from place order by ";
 		return this.jdbcTemplate
-				.query("select * from place",
-						new BeanPropertyRowMapper<ParkingLot>(
+				.query(sql+orderby+" "+sort,	new BeanPropertyRowMapper<ParkingLot>(
+								ParkingLot.class));
+
+	}
+	
+	
+	public List<ParkingLot> fillParkingLot(String orderby, String sort) {
+
+	
+		String sql = "select * from place order by ";
+		return this.jdbcTemplate
+				.query(sql+orderby+" "+sort,	new BeanPropertyRowMapper<ParkingLot>(
 								ParkingLot.class));
 
 	}
@@ -39,9 +52,9 @@ public class DAOimpl {
 	
 	public int insertPlace(ParkingLot place){
 			
-	String query = "insert into place (nom, ville, adresse, superficie, horaires, type, commentaire) values(?, ?, ?, ?, ?, ?, ?)";
+	String query = "insert into place (nom, ville, adresse, superficie, horaires, type, commentaire, id_user,note) values(?, ?, ?, ?, ?, ?, ?,?,?)";
 		int statut = this.jdbcTemplate.update(query, new Object[] { place.nom, place.ville,
-				place.adresse, place.superficie, place.horaires, place.type, place.commentaire});
+				place.adresse, place.superficie, place.horaires, place.type, place.commentaire, place.id_user,place.note});
 			
 		return statut;
 	
@@ -104,6 +117,15 @@ public class DAOimpl {
 		  return userinf;
 	}
 	
+public int insertVoiture(Voiture car){
+		
+		String query = "insert into voiture (marque, modèle, taille, id_user) values(?, ?, ?,?)";
+			int statut = this.jdbcTemplate.update(query, new Object[] { car.marque, car.modele,
+					car.taille, car.id_user});
+				
+			return statut;
+		
+		}
 	
 
 	

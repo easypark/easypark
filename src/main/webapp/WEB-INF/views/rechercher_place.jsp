@@ -21,6 +21,9 @@
 				<th>ville</th>
 				<th>commentaire</th>
 				<th>proprietaire</th>
+				<th>superficie</th>
+				<th><a style="color:white"href="rechercher_place?oby=note&sort=${sort}">note</a></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -31,12 +34,16 @@
 					<td><a href="place?id_place=${record.id}">${record.nom}</a> </td>
 					<td>${record.ville}</td>
 					<td>${record.commentaire}</td>
-					<td><a href="page_utilisateur?id_user=${record.id_user}".${record.id_user}>${record.id_user}</a></td>
-
+					<td><a href="page_utilisateur?id_user=${record.id_user}">${record.id_user}</a></td>
+	<td>${record.superficie}</td>
+		<td>${record.note }</td>
+	
 				</tr>
 				
  
 			</c:forEach>
+
+
 
  
  </tbody>

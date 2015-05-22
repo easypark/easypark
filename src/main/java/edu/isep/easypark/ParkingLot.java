@@ -13,6 +13,7 @@ public class ParkingLot implements Serializable {
 	String type;
 	String commentaire;
 	int id_user;
+	int note;
 	
 
 	@Override
@@ -85,5 +86,14 @@ public class ParkingLot implements Serializable {
 	public void setId_user(int id_user) {
 		this.id_user = id_user;
 	}
+
+	public int getNote() {
+		return note;
+	}
+
+	public void setNote(int note) {
+		this.note = note;
+	}
+	
 
 }

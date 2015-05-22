@@ -14,14 +14,10 @@
 <script src="<c:url value="/resources/js/fullcalendar.min.js"/>"></script>
 
 
-
 <script>
 
-function myFunction() {
-    
-	alert("hello");
-	return 0;              // The function returns the product of p1 and p2
-}
+
+
 
 	$(document).ready(function() {
 		
@@ -35,13 +31,19 @@ function myFunction() {
 			},
 			defaultDate: '2015-02-12',
 			editable: true,
-			eventLimit: 1, // allow "more" link when too many events
+			eventLimit: 2, // allow "more" link when too many events
 			events: [		{ title: 'My Event',
 			                 start: '2015-02-02',
 			                 url: 'http://google.com/',
 			                 allDay: true
 
-			}],
+			},{title: 'My Event',
+                start: '2015-02-02',
+                url: 'http://google.com/',
+                allDay: true}
+                
+              
+			],
 			  eventClick: function(event) {
 			        if (event.url) {
 			            window.open(event.url);
@@ -60,11 +62,19 @@ function myFunction() {
 		        // change the day's background color just for fun
 		        $(this).css('background-color', 'red');
 
-		    }
+		    },
+			    eventClick: function(event, element) {
+
+			        event.title = "CLICKED!";
+
+			        $('#calendar').fullCalendar('updateEvent', event);
+
+			    }
 		});
 		
 
 	});
+	alert("hi");
 
 </script>
 <style>
@@ -85,6 +95,7 @@ function myFunction() {
 </head>
 <body>
 	<div id='calendar'></div>
+	
 </body>
 
 

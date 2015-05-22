@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<title>Inscription</title>
+<title>Ajout voiture</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -10,9 +12,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="/resources/ajouter_place.css">	
-	
+	<link rel="stylesheet" type="text/css" href="/resources/ajouter_voiture.css">	
 	
 </head>
 <body>
@@ -48,59 +48,48 @@
 		</div>
 	</nav>
 	
-<!-- Ajouter une place -->
+<!-- Ajouter une voiture -->
 
-<section id="ajouterplace">
+<section id="ajoutervoiture">
 	<div class="container">
 
-		<h1>Ajouter une place</h1>
+		<h2>Ajoutez votre véhicule</h2>
 
-		<form action="add" method="POST">
+		<form   action="addvoiture"  method="POST" >
 
 			<div class="form-group">
-				<label for="nameplace">Nom de la place :</label> <input type="text"
-					class="form-control" NAME="nom" id="nameplace" value="nomplace"
-					placeholder="Visible uniquement par vous">
-			</div>
-
-				<div class="form-group">
-				<label for="ville">Ville:</label> <input type="text"
-					class="form-control" NAME="ville" "id="ville" value="villeplace"
-					placeholder="Entrez la ville oÃ¹ se situe votre place">
+				<label for="marque">Marque:</label> <input type="text"
+					class="form-control" NAME="marque" id="marque"
+					placeholder="Entrer la marque de votre véhicule">
 			</div>
 
 			<div class="form-group">
-				<label for="adress">Adresse:</label> <input type="text"
-					class="form-control" NAME="adresse" id="adress" value='adresseplace'
-					placeholder="Entrez l'adresse de votre place">
+				<label for="modele">Modèle:</label> <input type="text"
+					class="form-control" NAME="modele" id="modele"
+					placeholder="Entrer le modèle de votre véhicule">
 			</div>
 
 			<div class="form-group">
-				<label for="superficie">Superficie:</label> <input type="text" NAME="superficie"
-					class="form-control" id="superficie" value="superficieplace"
-					placeholder="Entrez la superficie de votre place" >
+				<label for="taille">Taille du véhicule:</label> <input type="text"
+					class="form-control" NAME="taille" id="taille"
+					placeholder="Entrer la taille de votre véhicule">
 			</div>
 
 			<div class="form-group">
-				<label for="color">DisponibilitÃ©s:</label> <input type="text"  NAME="horaires"
-					class="form-control" id="horaires" placeholder="Calendrier + Horaires" value=0>
+				<label for="couleur">Couleur:</label> <input type="text"
+					class="form-control" NAME="couleur" id="couleur"
+					placeholder="Entrer la couleur de votre véhicule">
 			</div>
-			
+
 			<div class="form-group">
-				<label for="color">DisponibilitÃ©s:</label> <input type="text"  NAME="type"
-					class="form-control" id="horaires" placeholder="Type de places" value="interieur">
+				<label for="cgrise">La carte grise</label> <input type="file"
+					id="cgrise">
 			</div>
-	
+
 			<div class="form-group">
-				<label for="comm">Commentaires:</label>
-				<input class="form-control" id="commentaire" rows="3" value="commentaireplace" NAME="commentaire">
+				<label for="photov">Photographie de votre véhicule</label> <input
+					type="file" id="photov">
 			</div>
-			
-		
-<!-- 			<div class="form-group"> -->
-<!-- 				<label for="parking">Photo du parking</label> <input type="file" -->
-<!-- 					id="parking"> -->
-<!-- 			</div> -->
 
 			<div>
 				<ul class="pagination">
@@ -110,22 +99,21 @@
 			</div>
 
 			<div>
-				 
 				<button type="submit" class="btn btn-info btn-md">Valider</button>
-				<button type="reset" class="btn btn-info btn-md">Retourner Ã 
-					l'Ã©tape prÃ©cÃ©dente</button>
-					
+				<button type="submit" class="btn btn-info btn-md">Retourner à
+					l'étape précédente</button>
 			</div>
 			
-			<div id="test11">
-			<a href="rediriger">Vous souhaitez également emprunter une place ? Cliquez ici pour rentrer votre vÃ©hicule </a>
+			<div id="test111">
+			<a href="http://www.easypark_inscription.com/">Vous avez
+					également un parking ? Cliquez ici </a> <br>
 			</div>
-			
+
 		</form>
 	</div>
-</section>
-
- <!-- Footer -->
+	</section>
+	
+	<!-- Footer -->
     <footer>
     <nav class="navbar navbar-inverse" id="footeressai">
         <div class="container">
@@ -137,8 +125,7 @@
                 </div>   
             </div>
         </div>
-        </nav>
     </footer>
-    
+
 </body>
 </html>

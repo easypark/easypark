@@ -1,7 +1,9 @@
 package edu.isep.easypark;
 
 
-	import javax.sql.DataSource;
+	import java.util.List;
+
+import javax.sql.DataSource;
 
 	import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +25,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 						sql, new Object[] {id},new BeanPropertyRowMapper(ParkingLot.class));
 			  
 			  return place;
+		}
+		
+		public List<Reservation> fillReservation() {
+
+			
+			String sql = "select * from reservation  ";
+			return this.jdbcTemplate
+					.query(sql,	new BeanPropertyRowMapper<Reservation>(
+									Reservation.class));
+
 		}
 		
 		

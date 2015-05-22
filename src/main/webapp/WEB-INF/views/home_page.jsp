@@ -63,7 +63,7 @@
       <br />
 </c:if>
 <c:if test  = "${catchException == null}">
-<li><a href="mon_profil">    <%= session.getAttribute("user")%></a></li>
+<li><a href="mon_profil">    <%= session.getAttribute("email")%></a></li>
  <li><a href="disconnect">Se déconnecter</a></li>
       <br />
 </c:if>
@@ -133,7 +133,7 @@
         
          <div class="row text-center">
                 <div class="col-md-4">
-                <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='/easypark/rechercher_place'">Je veux un parking</button>
+                <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='/easypark/rechercher_place?oby=id&sort=asc'">Je veux un parking</button>
                     
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>

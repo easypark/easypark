@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@SessionAttributes("loggedUser")
+
 public class ParkingLotController {
 
 	private static final Logger logger = LoggerFactory
@@ -37,34 +39,52 @@ public class ParkingLotController {
 	
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(ParkingLot park, Model model) {
+	public String add(ParkingLot park, Model model, HttpSession session) {
 
+	
+		park.id_user=(Integer) session.getAttribute("id_user");
+		park.note=0;
+		
 		// ParkingLot park2 = new ParkingLot();
 		logger.info("inserting placemax " + park.ville);
 		int statut = dao.insertPlace(park);
 		model.addAttribute("park", park);
 		model.addAttribute("message", "Votre place à été correctement ajoutée");
 		model.addAttribute("link",
-				"<a href='ajouter_place'>Ajouter une autre place</a>");
+				"<a href='ajouter_place'>Ajouter une autre place</a><br>"
+				+ "<a href='ajouter_voiture'>Ajouter un véhicule</a>"
+				
+				);
 
 		// else une erreure c'est produite
 		return "confirmation";
 	}
 	
 	@RequestMapping(value = "/rechercher_place", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, @RequestParam("oby") String orderby, @RequestParam("sort") String sort) {
+		
 		
 		ParkingLot searchFor = new ParkingLot();
 		model.addAttribute("searchFor", searchFor);
 		
-		List<ParkingLot> list = dao.fillParkingLot();
-		model.addAttribute("list", list);
-		
-		return "rechercher_place";
-		
-		
-		
+
+	List<ParkingLot> list = dao.fillParkingLot(orderby, sort);
+	model.addAttribute("list", list);
+	
+	if(sort.equals("asc")){
+		model.addAttribute("sort","desc");
 	}
+	else if(sort.equals("desc")){
+		model.addAttribute("sort","asc");
+
+	}
+
+
+		
+		
+		return "rechercher_place";		
+	}
+
 	
 
 	@RequestMapping(value = "/rechercher_place_advance", method = RequestMethod.POST)
@@ -122,6 +142,10 @@ public class ParkingLotController {
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
 	public String testCalendar(Locale locale, Model model) {
 
+		List<Reservation> list = dao2.fillReservation();
+		model.addAttribute("list", list);	
+		model.addAttribute("hi","hi");
+		
 		return "testCalendar";
 	}
 	

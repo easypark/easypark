@@ -9,12 +9,12 @@
 
 <title>EasyPark</title>
 
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<!-- <script -->
+<!-- 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 
 <link rel="stylesheet" type="text/css" href="/resources/home_page.css">
 
@@ -111,7 +111,7 @@
 			<a href="rechercher_place" class="btn btn-info btn-lg">
 			<span class="glyphicon glyphicon-search"></span> Rechercher</a>
 			<a href="#" class="btn btn-info btn-md">
-			<span class="glyphicon glyphicon-search"></span> Recherche avancÃ©e</a>
+			<span class="glyphicon glyphicon-search"></span> Recherche avancée</a>
 			
 		</div>
 		
@@ -140,7 +140,7 @@
                 
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                 <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='/easypark/ajouter_place'">Je prÃªte un parking</button>
+                 <button type="button" class="btn btn-info btn-lg" onclick="window.location.href='/easypark/ajouter_place'">Je prête un parking</button>
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                 </div>
                 
@@ -156,7 +156,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">L'Ã©quipe</h2>
+                    <h2 class="section-heading">L'équipe</h2>
                     <h3 class="section-subheading text-muted">Vous allez nous aimer.</h3>
                 </div>
               
@@ -167,7 +167,7 @@
                <div class="col-lg-12 text-center">
                         <img class=" img-circle" src="/resources/images/geektonic.png" alt=""   >
                         <h4 class="section-subheading text-muted">VERT TONIC.</h4>
-                        <p class="text-muted">Designers & DÃ©veloppeurs</p>
+                        <p class="text-muted">Designers & Développeurs</p>
                </div>
                
             </div>
@@ -182,7 +182,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading" id="contact1" >Contactez-nous !</h2>
-                    <h3 class="section-subheading">Nous sommes plutÃ´t sympas.</h3>
+                    <h3 class="section-subheading">Nous sommes plutôt sympas.</h3>
                 </div>
             </div>
             

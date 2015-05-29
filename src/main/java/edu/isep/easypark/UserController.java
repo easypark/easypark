@@ -23,6 +23,7 @@ public class UserController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 	private DAOimpl dao;
+	private ParkingLotDAOimpl dao2;
 
 	public UserController() throws SQLException {
 
@@ -30,6 +31,7 @@ public class UserController {
 				"/Bean.xml");
 
 		dao = (DAOimpl) context.getBean("easyparkDAO");
+		dao2 = (ParkingLotDAOimpl) context.getBean("easyparkDAOpl");
 
 	}
 
@@ -57,6 +59,22 @@ public class UserController {
 		return "formulaire_inscription";
 	}
 
+	@RequestMapping(value = "/add_commentaire", method = RequestMethod.POST)
+	public String addcom(Commentaires commentaire, Model model, HttpSession session){
+		
+		
+
+		logger.info("id_user "+commentaire.id_user);
+
+		dao.insertcom(commentaire);
+		
+	
+			userPage(model, session,commentaire.id_user);
+			return "page_utilisateur";
+
+
+	}
+	
 	@RequestMapping(value = "/page_utilisateur", method = RequestMethod.GET)
 	public String userPage(Model model, HttpSession session, @RequestParam("id_user") int user_id) {
 
@@ -66,6 +84,7 @@ public class UserController {
 		logger.info("Result of the query :  " + userInf.firstname);
 		
 		model.addAttribute("userInf",userInf);
+		model.addAttribute("user_id",user_id);
 		
 		
 		ParkingLot searchFor = new ParkingLot();
@@ -75,9 +94,22 @@ public class UserController {
 		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
 		model.addAttribute("list", list);
 
-		 model.addAttribute("searchFor", searchFor);
+		model.addAttribute("searchFor", searchFor);
+		
+		Commentaires commentaire = new Commentaires();
+		model.addAttribute("commentaire", commentaire);
+				
 		
 
+		
+//		List<Commentaires> list2 = dao.fillCommentaires();
+//		model.addAttribute("list2",list2);
+
+		List<Comment> list2 = dao.fillComment("id_user",user_id);
+		model.addAttribute("list2",list2);
+//		
+		logger.info("aoe");
+		
 		return "page_utilisateur";
 	}
 
@@ -93,7 +125,22 @@ public class UserController {
 
 		return "mon_profil";
 	}
-
+	
+	@RequestMapping(value = "/testcom", method = RequestMethod.GET)
+	public String testcom(Model model) {
+		
+		List<Reservation> list = dao2.fillReservation();
+		model.addAttribute("list",list);
+		
+//		List<Comment> list2 = dao.fillComment();
+//		model.addAttribute("list2",list2);
+//		
+//		List<ParkingLot> list = dao.fillParkingLot();
+//		model.addAttribute("list", list);
+		
+		return "testcom";
+	}
+	
 	public boolean isLoggedIn(){
 		return true;
 	}

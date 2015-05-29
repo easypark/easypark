@@ -19,6 +19,7 @@
 			<tr>
 				<th>nom</th>
 				<th>ville</th>
+				<th>adresse</th>
 				<th>commentaire</th>
 				<th>proprietaire</th>
 				<th>superficie</th>
@@ -33,6 +34,7 @@
 					
 					<td><a href="place?id_place=${record.id}">${record.nom}</a> </td>
 					<td>${record.ville}</td>
+					<td>${record.adresse }</td>
 					<td>${record.commentaire}</td>
 					<td><a href="page_utilisateur?id_user=${record.id_user}">${record.id_user}</a></td>
 	<td>${record.superficie}</td>

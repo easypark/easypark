@@ -13,16 +13,36 @@
 <script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/fullcalendar.min.js"/>"></script>
 
-
 <script>
 
 
+<c:forEach var="record" items="${list}">
 
+<tr>
+<td>${record.title}</td>
+<td>${record.start}</td>
+</tr>
+
+
+</c:forEach>
 
 	$(document).ready(function() {
+
+		
+		 var daySource = new Object();
+		    daySource.title = 'DAY'; // this should be string
+		    daySource.start = new Date(2015,01,19); // this should be date object
+		    daySource.end = new Date(2015,01,20);
+
+		    var day = new Array();
+		    day[0] = daySource;
+		
+	       
+
 		
 		$('#calendar').fullCalendar({
 
+		    
 			
 			header: {
 				left: 'prev,next today',
@@ -51,6 +71,8 @@
 			            return false;
 			        }
 			    },
+			    
+
 			dayClick: function(date, jsEvent, view) {
 
 		        alert('Clicked on: ' + date.format());
@@ -72,9 +94,8 @@
 			    }
 		});
 		
-
+		  $('#calendar').fullCalendar('addEventSource', day);
 	});
-	alert("hi");
 
 </script>
 <style>
@@ -95,6 +116,9 @@
 </head>
 <body>
 	<div id='calendar'></div>
+
+	
+		
 	
 </body>
 

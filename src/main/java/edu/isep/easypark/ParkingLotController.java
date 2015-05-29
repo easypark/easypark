@@ -85,8 +85,6 @@ public class ParkingLotController {
 		return "rechercher_place";		
 	}
 
-	
-
 	@RequestMapping(value = "/rechercher_place_advance", method = RequestMethod.POST)
 	public String rechercheAvance(Locale locale, Model model, ParkingLot searchFor) {
 
@@ -113,13 +111,14 @@ public class ParkingLotController {
 	}
 
 	@RequestMapping(value = "/place", method = RequestMethod.GET)
-	public String home(@RequestParam("id_place") int id_place , Model model, HttpSession session) {
+	public String place(@RequestParam("id_place") int id_place , Model model, HttpSession session) {
 		
+		logger.info("Testing  stuff ");
+
 		ParkingLot parkingLot= dao2.getPlaceInf(id_place);
 		
 		User user = (User) session.getAttribute("user");
 		
-		logger.info("Testing session stuff " + user.id);
 		
 		if(user.id==parkingLot.id_user){
 			
@@ -130,6 +129,19 @@ public class ParkingLotController {
 
 		}
 		
+		
+		model.addAttribute("hasvoted",dao.hasvoted("id_place",id_place,user.id));
+//		logger.info(" "+note);
+		
+		List<Comment> list2 = dao.fillComment("id_place",id_place);
+		model.addAttribute("list2",list2);
+		
+		int note = dao.getnote("id_place",id_place);
+		
+		
+
+		
+		model.addAttribute("note", note);
 		model.addAttribute("place", parkingLot);
 		model.addAttribute("id_place", id_place);
 		
@@ -144,9 +156,39 @@ public class ParkingLotController {
 
 		List<Reservation> list = dao2.fillReservation();
 		model.addAttribute("list", list);	
-		model.addAttribute("hi","hi");
 		
 		return "testCalendar";
 	}
+	
+	@RequestMapping(value = "/add_commentaire2", method = RequestMethod.POST) //changer ca un de ces jouts
+	public String addcom(Commentaires commentaire, Model model, HttpSession session){
+		
+		
+
+		logger.info("userfake "+commentaire.id_user);
+		logger.info("note "+commentaire.note);
+
+		dao.insertcom(commentaire);
+
+		place(commentaire.id_place ,  model,  session);
+			return "place";
+	
+	}
+	
+//	@RequestMapping(value = "/note", method = RequestMethod.POST) //changer ca un de ces jouts
+//	public String note(Commentaires commentaire, Model model, HttpSession session){
+//		
+//		
+//
+//		logger.info("note "+commentaire.note);
+//
+//		dao.insertcom(commentaire);
+//
+//		place(commentaire.id_place ,  model,  session);
+//			return "place";
+//	
+//	}
+	
+	
 	
 }

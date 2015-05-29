@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 		public  ParkingLot getPlaceInf(int id) {
 
-			 String sql = "SELECT * FROM place WHERE id = ?";
+			 String sql = "SELECT * FROM place WHERE id = ? ";
 			
 			  ParkingLot place = (ParkingLot) this.jdbcTemplate.queryForObject(
 						sql, new Object[] {id},new BeanPropertyRowMapper(ParkingLot.class));

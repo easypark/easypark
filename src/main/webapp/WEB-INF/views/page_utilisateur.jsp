@@ -44,5 +44,24 @@ Ses Places : <br>
  
  </tbody>
  </table>
+ 
+ 		<form action="add_commentaire" method="POST">
+ 		<input type="text" NAME="content"/>
+ 		<input style="display:none" value=<%=session.getAttribute("id_user")%> NAME='id_writter'/>
+ 		<input style="display:none" value=<%=request.getAttribute("user_id")%>  NAME='id_user'/> 
+ 		<input type="submit"/>
+ 	</form>
+ 	
+ 	<c:forEach var="list2" items="${list2}">
+
+				<tr>
+					<tr>
+					<td>${list2.content}</td>
+					<td>${list2.id_writter}</td>
+					<td>${list2.date}</td>
+					<br>
+				</tr>
+ 	</c:forEach>
+ 	visiting current user <%=request.getAttribute("user_id")%>
 </body>
 </html>

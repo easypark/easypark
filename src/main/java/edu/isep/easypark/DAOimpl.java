@@ -127,7 +127,51 @@ public int insertVoiture(Voiture car){
 		
 		}
 	
+public void insertcom(Commentaires com){
+	String query ="insert into commentaires (content, note, id_place, id_user, id_writter) values (?,?,?,?,?)";
+	 this.jdbcTemplate.update(query, new Object[] {com.content, com.note, com.id_place, com.id_user, com.id_writter});
+}
+
+
+
+public List<Comment> fillComment(String type, int id) {
 
 	
+	String sql = "select * from commentaires where ";
+	return this.jdbcTemplate
+			.query(sql+type+" = "+id+" order by date desc",	new BeanPropertyRowMapper<Comment>(
+							Comment.class));
+
+}
+
+public int getnote(String type, int id) {
+	// TODO Auto-generated method stub
+	
+	
+	
+	String sql = "select avg(note) from commentaires where ";
+	
+	int moyenne = this.jdbcTemplate.queryForInt(sql+type+" = "+id);
+//			.query(sql+type+" = "+id,	
+//					Integer.class);
+	
+	return moyenne;
+	
+}
+
+public Object hasvoted(String type, int id, int id_user) {
+
+    String sql = "SELECT count(*) FROM commentaires WHERE note > 0 and id_writter = ? AND ";
+		boolean result = false;
+	 
+		int count = this.jdbcTemplate.queryForObject(
+	                        sql+type+" = "+id , new Object[] { id_user }, Integer.class);
+
+
+		if (count > 0) {
+			result = true;
+		}
+		return result;
+}
 	
 }

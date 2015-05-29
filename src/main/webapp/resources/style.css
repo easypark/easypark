@@ -1,9 +1,0 @@
-@CHARSET "ISO-8859-1";
-
-* { font-family:Arial}
-table, th, td {border:1px solid blue;padding:5px}
-table {border-collapse:collapse;width:100%}
-th {height:20px;text-align:center;background-color:blue;color:white;}
-td {text-align:left;height:20px;vertical-align:bottom;}
-.container {width:70%;margin:10px auto}
-

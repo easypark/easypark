@@ -1,4 +1,4 @@
-package edu.isep.easypark;
+package edu.isep.easypark.controller;
 
 import java.sql.SQLException;
 import java.util.Locale;
@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import edu.isep.easypark.DAOimpl;
+import edu.isep.easypark.model.User;
 
 /**
  * Handles requests for the application home page.
@@ -59,14 +62,14 @@ public class HomeController {
 
 	@RequestMapping(value = "/connect", method = RequestMethod.POST)
 	public String connecting(User user, Model model, HttpSession session) {
-		logger.info("Trying to connect with email " + user.email);
+		logger.info("Trying to connect with email " + user.getEmail());
 		boolean ishere = dao.verifyUser(user);
 		logger.info("is user present? " + ishere);
 		if (ishere) {
-			user.id = dao.getUserId(user);
-			logger.info("user id? " + user.id);
-			session.setAttribute("id_user", user.id);
-			session.setAttribute("email", user.email);
+			user.setId(dao.getUserId(user));
+			logger.info("user id? " + user.getId());
+			session.setAttribute("id_user", user.getId());
+			session.setAttribute("email", user.getEmail());
 			session.setAttribute("user",user);
 		}
 

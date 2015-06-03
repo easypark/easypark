@@ -1,4 +1,4 @@
-package edu.isep.easypark;
+package edu.isep.easypark.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import edu.isep.easypark.DAOimpl;
+import edu.isep.easypark.ParkingLotDAOimpl;
+import edu.isep.easypark.model.Comment;
+import edu.isep.easypark.model.Commentaires;
+import edu.isep.easypark.model.ParkingLot;
+import edu.isep.easypark.model.Reservation;
+import edu.isep.easypark.model.User;
+import edu.isep.easypark.model.UserInformations;
 
 @Controller
 @SessionAttributes("loggedUser")
@@ -38,8 +47,8 @@ public class UserController {
 	@RequestMapping(value = "/adduser", method = RequestMethod.POST)
 	public String adduser(User user, UserInformations userinf, Model model) {
 
-		logger.info("inserting user " + user.email + "firstname : "
-				+ userinf.firstname);
+		logger.info("inserting user " + user.getEmail() + "firstname : "
+				+ userinf.getFirstname());
 		int statut = dao.insertUser(user, userinf);
 		logger.info("Inserted user with id :  " + statut);
 
@@ -64,12 +73,12 @@ public class UserController {
 		
 		
 
-		logger.info("id_user "+commentaire.id_user);
+		logger.info("id_user "+commentaire.getId_user());
 
 		dao.insertcom(commentaire);
 		
 	
-			userPage(model, session,commentaire.id_user);
+			userPage(model, session,commentaire.getId_user());
 			return "page_utilisateur";
 
 
@@ -81,15 +90,15 @@ public class UserController {
 		UserInformations userInf = new UserInformations();
 		userInf = dao.getUserInf(user_id);
 		
-		logger.info("Result of the query :  " + userInf.firstname);
+		logger.info("Result of the query :  " + userInf.getFirstname());
 		
 		model.addAttribute("userInf",userInf);
 		model.addAttribute("user_id",user_id);
 		
 		
 		ParkingLot searchFor = new ParkingLot();
-		searchFor.adresse = "";
-		searchFor.id_user = user_id;
+		searchFor.setAdresse("");
+		searchFor.setId_user(user_id);
 
 		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
 		model.addAttribute("list", list);
@@ -117,8 +126,8 @@ public class UserController {
 	public String myPage(Model model, HttpSession session) {
 
 		ParkingLot searchFor = new ParkingLot();
-		searchFor.adresse = "";
-		searchFor.id_user = (Integer) session.getAttribute("id_user");
+		searchFor.setAdresse("");
+		searchFor.setId_user((Integer) session.getAttribute("id_user"));
 
 		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
 		model.addAttribute("list", list);
@@ -129,8 +138,8 @@ public class UserController {
 	@RequestMapping(value = "/testcom", method = RequestMethod.GET)
 	public String testcom(Model model) {
 		
-		List<Reservation> list = dao2.fillReservation();
-		model.addAttribute("list",list);
+//		List<Reservation> list = dao2.fillReservation();
+//		model.addAttribute("list",list);
 		
 //		List<Comment> list2 = dao.fillComment();
 //		model.addAttribute("list2",list2);

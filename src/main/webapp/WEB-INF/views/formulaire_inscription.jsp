@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +16,7 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	
 	
-	<link rel="stylesheet" type="text/css" href="formulaire_inscription.css">	
+	<link href="<c:url value="/resources/ajouter_place1.css" />" rel="stylesheet">
 </head>
 
 <body>
@@ -67,9 +70,9 @@
 			</div>
 
 			<div class="form-group">
-				<label for="firstname">PrÃ©nom:</label> <input type="text" NAME="firstname"
+				<label for="firstname">Prénom:</label> <input type="text" NAME="firstname"
 					class="form-control" id="firstname"
-					placeholder="Entrez votre prÃ©nom">
+					placeholder="Entrez votre prénom">
 			</div>
 
 			<div class="form-group">
@@ -107,7 +110,7 @@
 			
 			<div>
 			<button type="submit" class="btn btn-info btn-md">Valider</button>
-			<button type="submit" class="btn btn-info btn-md">Retour Ã  l'accueil</button>
+			<button type="submit" class="btn btn-info btn-md">Retour à  l'accueil</button>
 			</div>
 			
 		</form>

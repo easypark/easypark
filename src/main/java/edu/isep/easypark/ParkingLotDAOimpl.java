@@ -8,6 +8,9 @@ import javax.sql.DataSource;
 	import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import edu.isep.easypark.model.ParkingLot;
+import edu.isep.easypark.model.Reservation;
+
 	public class ParkingLotDAOimpl {
 		private JdbcTemplate jdbcTemplate;
 
@@ -27,12 +30,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 			  return place;
 		}
 		
-		public List<Reservation> fillReservation() {
+		public List<Reservation> fillReservation(int id_place) {
 
 			
-			String sql = "select * from reservation  ";
+			String sql = "select * from reservation where id_place = ?";
 			return this.jdbcTemplate
-					.query(sql,	new BeanPropertyRowMapper<Reservation>(
+					.query(sql,new Object[] {id_place}	,new BeanPropertyRowMapper<Reservation>(
 									Reservation.class));
 
 		}

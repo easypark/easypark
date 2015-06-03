@@ -1,4 +1,4 @@
-package edu.isep.easypark;
+package edu.isep.easypark.model;
 
 import java.io.Serializable;
 

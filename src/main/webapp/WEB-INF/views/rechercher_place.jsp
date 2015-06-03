@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="<c:url value="/resources/style.css" />" rel="stylesheet"
+<link href="<c:url value="/resources/style1.css" />" rel="stylesheet"
 	type="text/css" media="screen" />
 
 <title>Rechercher une place</title>

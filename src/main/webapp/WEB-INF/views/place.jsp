@@ -5,15 +5,16 @@
 
 <html>
 <head>
+	<link href="<c:url value="/resources/style1.css" />" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Page d'une place</title>
 </head>
 <body>
 
 ${id_place}
 ${place.nom}
 ${hasvoted}
-
+<td><a href="add_disponibilite?id_place=${id_place}">Ajouter des disponibilités</a></td>
 
  		<form action="add_commentaire2" method="POST">
  		<input type="text" NAME="content"/>

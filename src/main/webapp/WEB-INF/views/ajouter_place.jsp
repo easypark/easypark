@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +14,7 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="/resources/ajouter_place.css">	
+	<link href="<c:url value="/resources/ajouter_place1.css" />" rel="stylesheet">
 	
 	
 </head>
@@ -82,12 +85,12 @@
 			</div>
 
 			<div class="form-group">
-				<label for="color">DisponibilitÃ©s:</label> <input type="text"  NAME="horaires"
+				<label for="color">Disponibilités:</label> <input type="text"  NAME="horaires"
 					class="form-control" id="horaires" placeholder="Calendrier + Horaires" value=0>
 			</div>
 			
 			<div class="form-group">
-				<label for="color">DisponibilitÃ©s:</label> <input type="text"  NAME="type"
+				<label for="color">Disponibilités:</label> <input type="text"  NAME="type"
 					class="form-control" id="horaires" placeholder="Type de places" value="interieur">
 			</div>
 	
@@ -112,13 +115,12 @@
 			<div>
 				 
 				<button type="submit" class="btn btn-info btn-md">Valider</button>
-				<button type="reset" class="btn btn-info btn-md">Retourner Ã 
-					l'Ã©tape prÃ©cÃ©dente</button>
+				<button type="reset" class="btn btn-info btn-md">Retourner à l'étape précédente</button>
 					
 			</div>
 			
 			<div id="test11">
-			<a href="rediriger">Vous souhaitez également emprunter une place ? Cliquez ici pour rentrer votre vÃ©hicule </a>
+			<a href="rediriger">Vous souhaitez également emprunter une place ? Cliquez ici pour rentrer votre véhicule </a>
 			</div>
 			
 		</form>

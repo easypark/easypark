@@ -28,7 +28,6 @@ import edu.isep.easypark.model.User;
 
 @Controller
 @SessionAttributes("loggedUser")
-
 public class ParkingLotController {
 
 	private static final Logger logger = LoggerFactory
@@ -44,15 +43,13 @@ public class ParkingLotController {
 		dao = (DAOimpl) context.getBean("easyparkDAO");
 		dao2 = (ParkingLotDAOimpl) context.getBean("easyparkDAOpl");
 	}
-	
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(ParkingLot park, Model model, HttpSession session) {
 
-	
 		park.setId_user((Integer) session.getAttribute("id_user"));
 		park.setNote(0);
-		
+
 		// ParkingLot park2 = new ParkingLot();
 		logger.info("inserting placemax " + park.getVille());
 		int statut = dao.insertPlace(park);
@@ -60,56 +57,52 @@ public class ParkingLotController {
 		model.addAttribute("message", "Votre place à été correctement ajoutée");
 		model.addAttribute("link",
 				"<a href='ajouter_place'>Ajouter une autre place</a><br>"
-				+ "<a href='ajouter_voiture'>Ajouter un véhicule</a>"
-				
-				);
+						+ "<a href='ajouter_voiture'>Ajouter un véhicule</a>"
+
+		);
 
 		// else une erreure c'est produite
 		return "confirmation";
 	}
-	
+
 	@RequestMapping(value = "/rechercher_place", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, @RequestParam("oby") String orderby, @RequestParam("sort") String sort) {
-		
-		
+	public String home(Locale locale, Model model,
+			@RequestParam("oby") String orderby,
+			@RequestParam("sort") String sort) {
+
 		ParkingLot searchFor = new ParkingLot();
 		model.addAttribute("searchFor", searchFor);
-		
 
-	List<ParkingLot> list = dao.fillParkingLot(orderby, sort);
-	model.addAttribute("list", list);
-	
-	if(sort.equals("asc")){
-		model.addAttribute("sort","desc");
-	}
-	else if(sort.equals("desc")){
-		model.addAttribute("sort","asc");
+		List<ParkingLot> list = dao.fillParkingLot(orderby, sort);
+		model.addAttribute("list", list);
 
-	}
+		if (sort.equals("asc")) {
+			model.addAttribute("sort", "desc");
+		} else if (sort.equals("desc")) {
+			model.addAttribute("sort", "asc");
 
+		}
 
-		
-		
-		return "rechercher_place";		
+		return "rechercher_place";
 	}
 
 	@RequestMapping(value = "/rechercher_place_advance", method = RequestMethod.POST)
-	public String rechercheAvance(Locale locale, Model model, ParkingLot searchFor) {
+	public String rechercheAvance(Locale locale, Model model,
+			ParkingLot searchFor) {
 
 		logger.info("Researching for this user : " + searchFor.getId_user());
 		logger.info("Researching at this place : " + searchFor.getAdresse());
-		
+
 		ParkingLot searchForNew = new ParkingLot();
 		model.addAttribute("searchFor", searchForNew);
-		
+
 		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
 		model.addAttribute("list", list);
-		
+
 		return "rechercher_place";
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/ajouter_place", method = RequestMethod.GET)
 	public String ajouterPlace(Locale locale, Model model) {
 		logger.info("creating new parkingLot object ");
@@ -119,101 +112,108 @@ public class ParkingLotController {
 	}
 
 	@RequestMapping(value = "/place", method = RequestMethod.GET)
-	public String place(@RequestParam("id_place") int id_place , Model model, HttpSession session) {
-		
-		logger.info("Testing  stuff ");
+	public String place(@RequestParam("id_place") int id_place, Model model,
+			HttpSession session) {
 
-		ParkingLot parkingLot= dao2.getPlaceInf(id_place);
-		
+		ParkingLot parkingLot = dao2.getPlaceInf(id_place);
+
 		User user = (User) session.getAttribute("user");
-		
-		
-		if(user.getId()==parkingLot.getId_user()){
-			
-			model.addAttribute("action", "<a href='#'>Modifier les information de votre place</a>");
-		}
-		else{
-			model.addAttribute("action", "demander une reservation");
 
-		}
-		
-		
-		model.addAttribute("hasvoted",dao.hasvoted("id_place",id_place,user.getId()));
-//		logger.info(" "+note);
-		
-		List<Comment> list2 = dao.fillComment("id_place",id_place);
-		model.addAttribute("list2",list2);
-		
-		int note = dao.getnote("id_place",id_place);
-		
-		
+		if (user.getId() == parkingLot.getId_user()) {
 
-		
+			model.addAttribute("isMine", true);
+			List<Reservation> list = dao2.fillReservation(id_place);
+			model.addAttribute("list", list);
+		} else {
+			logger.info("not his");
+
+			model.addAttribute("isMine", false);
+			List<Reservation> list = dao2.fillReservation2(id_place);
+			model.addAttribute("list", list);
+		}
+
+		model.addAttribute("hasvoted",
+				dao.hasvoted("id_place", id_place, user.getId()));
+		// logger.info(" "+note);
+
+		List<Comment> list2 = dao.fillComment("id_place", id_place);
+		model.addAttribute("list2", list2);
+
+		int note = dao.getnote("id_place", id_place);
+
 		model.addAttribute("note", note);
 		model.addAttribute("place", parkingLot);
 		model.addAttribute("id_place", id_place);
-		
+
 		return "place";
-		
-		
-		
+
 	}
-	
+
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
 	public String testCalendar(Locale locale, Model model) {
 
-	List<Reservation> list = dao2.fillReservation(2);
-		model.addAttribute("list", list);		
-		
+		List<Reservation> list = dao2.fillReservation(2);
+		model.addAttribute("list", list);
+
 		return "testCalendar";
 	}
+
 	@RequestMapping(value = "/calendar2", method = RequestMethod.GET)
 	public String testCalendar2(Locale locale, Model model) {
 
 		List<Reservation> list = dao2.fillReservation(2);
-		model.addAttribute("list", list);	
-		
+		model.addAttribute("list", list);
+
 		return "basic-views";
 	}
-	
-	@RequestMapping(value = "/add_commentaire2", method = RequestMethod.POST) //changer ca un de ces jouts
-	public String addcom(Commentaires commentaire, Model model, HttpSession session){
-		
-		
 
-	
+	@RequestMapping(value = "/add_commentaire2", method = RequestMethod.POST)
+	// changer ca un de ces jouts
+	public String addcom(Commentaires commentaire, Model model,
+			HttpSession session) {
 
 		dao.insertcom(commentaire);
 
-		place(commentaire.getId_place() ,  model,  session);
-			return "place";
-	
+		place(commentaire.getId_place(), model, session);
+		return "place";
+
 	}
-	
-//	@RequestMapping(value = "/note", method = RequestMethod.POST) //changer ca un de ces jouts
-//	public String note(Commentaires commentaire, Model model, HttpSession session){
-//		
-//		
-//
-//		logger.info("note "+commentaire.note);
-//
-//		dao.insertcom(commentaire);
-//
-//		place(commentaire.id_place ,  model,  session);
-//			return "place";
-//	
-//	}
-	
+
+	// @RequestMapping(value = "/note", method = RequestMethod.POST) //changer
+	// ca un de ces jouts
+	// public String note(Commentaires commentaire, Model model, HttpSession
+	// session){
+	//
+	//
+	//
+	// logger.info("note "+commentaire.note);
+	//
+	// dao.insertcom(commentaire);
+	//
+	// place(commentaire.id_place , model, session);
+	// return "place";
+	//
+	// }
+
 	@RequestMapping(value = "/add_disponibilite", method = RequestMethod.GET)
-	public String addDisponibilite(@RequestParam("id_place") int id_place ,Locale locale, Model model) {
+	public String addDisponibilite(@RequestParam("id_place") int id_place,
+			Locale locale, Model model, HttpSession session) {
 
+		User user = (User) session.getAttribute("user");
 
-		model.addAttribute("id_place", id_place);	
+		model.addAttribute("id_place", id_place);
 		List<Reservation> list = dao2.fillReservation(id_place);
 		model.addAttribute("list", list);
-		
-		
+
+		// if(user.getId()==parkingLot.getId_user()){
+		// model.addAttribute("isMine", true);
+		// }
+		// else{
+		// model.addAttribute("isMine", false);
+		//
+		// }
+
 		return "add_disponibilite";
 	}
-	
+
 }

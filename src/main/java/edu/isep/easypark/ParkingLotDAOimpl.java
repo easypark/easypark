@@ -39,6 +39,13 @@ import edu.isep.easypark.model.Reservation;
 									Reservation.class));
 
 		}
+
+		public List<Reservation> fillReservation2(int id_place) {
+			String sql = "select * from reservation where status = 'free' and id_place = ? ";
+			return this.jdbcTemplate
+					.query(sql,new Object[] {id_place}	,new BeanPropertyRowMapper<Reservation>(
+									Reservation.class));
+		}
 		
 		
 }

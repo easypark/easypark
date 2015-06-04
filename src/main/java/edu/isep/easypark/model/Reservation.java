@@ -14,10 +14,20 @@ public class Reservation {
 	String status;
 	int id_place;
 	int id_user;
+	String color;
 	
 
 	
 	
+	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	public int getId() {
 		return id;
 	}

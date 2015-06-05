@@ -67,7 +67,7 @@
       <br />
 </c:if>
 <c:if test  = "${catchException == null}">
-<li><a href="mon_profil">    <%= session.getAttribute("email")%></a></li>
+<li><a href="page_utilisateur?id_user=${session.getAttribute('id_user') }" %>>    <%= session.getAttribute("email")%></a></li>
  <li><a href="disconnect">Se déconnecter</a></li>
       <br />
 </c:if>

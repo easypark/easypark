@@ -1,0 +1,43 @@
+@CHARSET "ISO-8859-1";
+
+.glyphicon{
+	color:#47D1FF;
+}
+
+#profil_preteur{
+
+	margin-top: 2cm;
+	margin-bottom: 2cm;
+	
+}
+
+
+.img-circle{
+	margin-top: 0.8cm;
+	margin-bottom: 0.5cm;
+
+}
+
+#color{
+	margin-bottom:1.5cm;
+}
+
+
+#comm{
+	margin-bottom:1cm;
+}
+
+#bouton1{
+	margin-top:1cm;
+}
+
+
+#footeressai{
+	
+	margin-bottom:0;
+}
+
+.copyright{
+	
+	color:white;
+}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
 <head>
@@ -97,10 +97,7 @@ $(document).ready(function(){
 
 		    },
 			    eventClick: function(event, element) {
-			  // 	window.confirm("Annuler l'évènement ?"  + event.status)
-// 			   $('#calendar').fullCalendar( 'gotoDate', event.date )
-// 		       $('#calendar').fullCalendar('updateEvent', event);
-			  
+ 
 			  if(${isMine}){
 			    	 eventClickMine(event,element);
 
@@ -127,79 +124,81 @@ $(document).ready(function(){
 
 
 
-	<link href="<c:url value="/resources/style1.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/style1.css" />" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Page d'une place</title>
 </head>
 <body>
 
-${id_place}
-${place.nom}
-${hasvoted}
+	Id Place${id_place}
+	 Nom Place ${place.nom} <br>Ville Place ${place.ville } <br>Place Adresse ${place.adresse } <br>Place Superficie ${place.superficie }<br>
+	<form action="add_commentaire2" method="POST">
+		<input type="text" NAME="content" /> <input style="display: none"
+			value=<%=session.getAttribute("id_user")%> NAME='id_writter' /> <input
+			style="display: none" value=<%=request.getAttribute("id_place")%>
+			NAME='id_place' /> <input type="submit" />
+	</form>
 
- 		<form action="add_commentaire2" method="POST">
- 		<input type="text" NAME="content"/>
- 		<input style="display:none" value=<%=session.getAttribute("id_user")%> NAME='id_writter'/>
-  		<input style="display:none" value=<%=request.getAttribute("id_place")%>  NAME='id_place'/>  
+	<c:forEach var="list2" items="${list2}">
 
- 		<input type="submit"/>
- 	</form>
- 	
- 	<c:forEach var="list2" items="${list2}">
+		<tr>
+		<tr>
+			<td>${list2.content}</td>
+			<td>${list2.id_writter}</td>
+			<td>${list2.date}</td>
+			<br>
+		</tr>
+	</c:forEach>
 
-				<tr>
-					<tr>
-					<td>${list2.content}</td>
-					<td>${list2.id_writter}</td>
-					<td>${list2.date}</td>
-					<br>
-				</tr>
- 	</c:forEach>
- 	
- 	   id place <%=request.getAttribute("id_place")%>
-   
-${action}<br>
-  
-     <c:choose>
-      <c:when test="${isMine==true}">
-<a href='#'>Modifier les information de votre place</a>    <br />
-      </c:when>
-       <c:otherwise>	
- <a href="">Demander une reservation</a><br>
-      </c:otherwise>
-   </c:choose>
- 	<c:choose>
-      <c:when test="${hasvoted==true}">
+	id place
+	<%=request.getAttribute("id_place")%>
+
+	${action}
+	<br>
+
+	<c:choose>
+		<c:when test="${isMine==true}">
+			<a href='#'>Modifier les information de votre place</a>
+			<br />
+		</c:when>
+		<c:otherwise>
+			<a href="">Demander une reservation</a>
+			<br>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${hasvoted==true}">
       vous avez deja voter pour cette place
       <br />
-      </c:when>
-   
+		</c:when>
 
-      <c:otherwise>		<form action="add_commentaire2" method="POST">
- 		<input type="text" NAME="note"/>
- 		<input style="display:none" value=<%=session.getAttribute("id_user")%> NAME='id_writter'/>
- 		<input type="submit"/>
- 	</form>
-      
-      </c:otherwise>
-</c:choose>
 
-note : ${note}
-<br></br>
-<div id='calendar' ></div>
-	     <c:choose>
-      <c:when test="${isMine==true}">
-	<button onclick="addevent()">Ajouter une disponibilité</button>
-	<button onclick="stopaddevent()">Terminer</button>
+		<c:otherwise>
+			<form action="add_commentaire2" method="POST">
+				<input type="text" NAME="note" /> <input style="display: none"
+					value=<%=session.getAttribute("id_user")%> NAME='id_writter' /> <input
+					type="submit" />
+			</form>
+
+		</c:otherwise>
+	</c:choose>
+
+	note : ${note}
 	<br></br>
+	<div id='calendar'></div>
+	<c:choose>
+		<c:when test="${isMine==true}">
+			<button onclick="addevent()">Ajouter une disponibilité</button>
+			<button onclick="stopaddevent()">Terminer</button>
+			<br></br>
 	start :
 	<input type="text" class="timepicker" name="time" id="startHour">
-		</br> end : <input type="text" class="timepicker" name="time" id="endHour">
+			</br> end : <input type="text" class="timepicker" name="time" id="endHour">
 			<span style="display: none; color: red" id="ValueError">La
 				valeur de fin est inférieur à celle de début</span>
-      </c:when>
-   </c:choose>
-		
+		</c:when>
+	</c:choose>
+
 
 
 </body>

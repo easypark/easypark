@@ -1,0 +1,28 @@
+@CHARSET "ISO-8859-1";
+
+* { font-family:Arial}
+table, th, td {border:1px solid blue;padding:5px}
+table {border-collapse:collapse;width:100%}
+th {height:20px;text-align:center;background-color:blue;color:white;}
+td {text-align:left;height:20px;vertical-align:bottom;}
+
+
+#calendar {
+	width: 900px;
+	margin: 0 auto;
+}
+
+
+
+
+.container {
+  
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: 5px;
+  margin-top: 50px;
+	}
+
+
+

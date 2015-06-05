@@ -1,0 +1,55 @@
+@CHARSET "ISO-8859-1";
+
+.glyphicon{
+	color:#47D1FF;
+}
+
+#footeressai{
+	
+	margin-bottom:0;
+}
+
+.copyright{
+	
+	color:white;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 40px;
+}
+
+.boutons{
+	  margin-bottom: 5px
+}
+
+#inscription1 {
+	background-image: url(images/parking2.jpg);
+	background-attachment: fixed;
+  	background-repeat: no-repeat;
+  	background-size: 100%;	
+   	background-position: center; 	
+	
+}
+
+h1 {
+color:white;	
+}
+
+
+.form-group {
+	color:white;
+}
+	
+.checkbox	{
+	color:white;
+}
+	
+	
+	
+	
+	
+	

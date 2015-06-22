@@ -11,6 +11,7 @@ import edu.isep.easypark.model.Comment;
 import edu.isep.easypark.model.Commentaires;
 import edu.isep.easypark.model.ParkingLot;
 import edu.isep.easypark.model.User;
+import edu.isep.easypark.model.UserFull;
 import edu.isep.easypark.model.UserInformations;
 import edu.isep.easypark.model.Voiture;
 
@@ -45,16 +46,37 @@ public class DAOimpl {
 
 	}
 	
-	public List<ParkingLot> fillParkingLot2(ParkingLot parkingLot) {
+//	public List<ParkingLot> fillParkingLot2(String adresse, String id_user) {
+//	
+//	adresse = "%" + adresse + "%";
+//    String sql = "select * from place where adresse like ? and id_user like ?";
+//
+//	           return this.jdbcTemplate.query(sql, new BeanPropertyRowMapper<ParkingLot>(
+//						ParkingLot.class),  adresse, id_user);
+//	 
+//	                      }
 	
-	parkingLot.setAdresse("%".concat(parkingLot.getAdresse()).concat("%")); //SQL à l'air d'échapper les %
-	     String sql = "select * from place where adresse like ? and id_user like ?";
+	
+	public List<ParkingLot> fillParkingLot2(String adresse, String date) {
+		
+	adresse = "%" + adresse + "%";
+	date =date + "%";
+    String sql = "select * from place, reservation where place.adresse like ? and reservation.start like ?  and reservation.id_place = place.id";
 
 	           return this.jdbcTemplate.query(sql, new BeanPropertyRowMapper<ParkingLot>(
-						ParkingLot.class),  parkingLot.getAdresse(), parkingLot.getId_user());
+						ParkingLot.class),  adresse, date);
 	 
 	                      }
 	
+	public List<ParkingLot> fillParkingLot(int user_id) {
+		
+		
+	    String sql = "select * from place where id_user = ?";
+
+		           return this.jdbcTemplate.query(sql, new BeanPropertyRowMapper<ParkingLot>(
+							ParkingLot.class),  user_id);
+		 
+		                      }
 	
 	
 	public int insertPlace(ParkingLot place){
@@ -79,24 +101,17 @@ public class DAOimpl {
 
 		
 		return id_user;
-		
-		
-//		query = "insert into user_informations (id_user,name,firstname) values(?, ?,?)";
-//		statut = this.jdbcTemplate.update(query, new Object[] { 0, user.name, user.firstname});
-		
-	
 	}
 	
 
 	
 	 public boolean verifyUser(User user) {
 		 
-	        String sql = "SELECT count(*) FROM user WHERE email = ? AND password = ?";
+	        String sql = "SELECT count(*) FROM user WHERE email = ? AND password = ? AND role = ?";
 		boolean result = false;
 	 
 		int count = this.jdbcTemplate.queryForObject(
-	                        sql, new Object[] { user.getEmail(), user.getPassword() }, Integer.class);
-
+	                        sql, new Object[] { user.getEmail(), user.getPassword(), user.getRole() }, Integer.class);
 
 		if (count > 0) {
 			result = true;
@@ -113,6 +128,16 @@ public class DAOimpl {
 				 return id;
 		 
 	 }
+	 
+	 public String getUserName(int user_id){
+		 String sql = "SELECT name FROM user_informations WHERE id_user = ?";
+		 String name =  this.jdbcTemplate.queryForObject(
+                 sql, new Object[] { user_id }, String.class);
+				 
+				 return name;
+		 
+	 }
+	 
 
 	public  UserInformations getUserInf(int user_id) {
 
@@ -152,10 +177,7 @@ public List<Comment> fillComment(String type, int id) {
 }
 
 public int getnote(String type, int id) {
-	// TODO Auto-generated method stub
-	
-	
-	
+
 	String sql = "select avg(note) from commentaires where ";
 	
 	int moyenne = this.jdbcTemplate.queryForInt(sql+type+" = "+id);
@@ -180,5 +202,38 @@ public Object hasvoted(String type, int id, int id_user) {
 		}
 		return result;
 }
+
+public  UserInformations getUserFull(int user_id) {
+
+	 String sql = "SELECT id_user, firstname, name FROM user_informations WHERE id_user = ?";
 	
+	  UserInformations userinf = (UserInformations) this.jdbcTemplate.queryForObject(
+				sql, new Object[] {user_id},new BeanPropertyRowMapper(UserInformations.class));
+	  
+	  return userinf;
+}
+public List<UserFull> fillUserFull() {
+
+	
+	String sql = "select * from user, user_informations where user.ID=user_informations.id_user and user.role != 'admin'";
+	return this.jdbcTemplate
+			.query(sql,	new BeanPropertyRowMapper<UserFull>(
+							UserFull.class));
+
+}
+
+public List<Comment> fillComment() {
+	String sql = "select * from commentaires ";
+	return this.jdbcTemplate
+			.query(sql+" order by date desc",	new BeanPropertyRowMapper<Comment>(
+							Comment.class));
+}
+
+public List<UserFull> fillAdminFull() {
+	String sql = "select * from user, user_informations where user.ID=user_informations.id_user and user.role = 'admin'";
+	return this.jdbcTemplate
+			.query(sql,	new BeanPropertyRowMapper<UserFull>(
+							UserFull.class));
+}
+
 }

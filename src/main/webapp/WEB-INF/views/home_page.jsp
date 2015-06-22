@@ -56,18 +56,14 @@
 </c:catch>
 
 <c:if test = "${catchException != null}">
-   	<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
-					<ul class="dropdown-menu">
-            			<li><a href="inscription?structur=0">En tant que particulier</a></li>
-            			<li><a href="inscription?structur=1">En tant que entreprise</a></li>
-          			</ul>
+   	<li class="dropdown"><a class="dropdown-toggle" href="inscription?structur=0" ><span class="glyphicon glyphicon-user"></span>   Inscription</a>
 				</li>
 		<li><a href="connexion"><span class="glyphicon glyphicon-log-in"></span>    Se connecter</a></li>
 
       <br />
 </c:if>
 <c:if test  = "${catchException == null}">
-<li><a href="page_utilisateur?id_user=${session.getAttribute('id_user') }" %>>    <%= session.getAttribute("email")%></a></li>
+<li><a href="mon_profil">    <%= session.getAttribute("email")%></a></li>
  <li><a href="disconnect">Se déconnecter</a></li>
       <br />
 </c:if>
@@ -80,20 +76,7 @@
 	
 	</nav>
 	
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- La Recherche --> 
+		<!-- La Recherche --> 
 	<section id="recherche">
 	<div class="container">
 		
@@ -192,21 +175,21 @@
             
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form name="sentMessage" id="contactForm"  action="sendAdminMail"  method="POST" novalidate>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Votre Nom*" id="name" required data-validation-required-message="Entrez votre nom.">
+                                    <input type="text" class="form-control" placeholder="Motif*" NAME="motif" id="motif" required data-validation-required-message="Entrez votre nom.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Votre Email *" id="email" required data-validation-required-message="Entrez votre adresse mail.">
+                                    <input type="email" class="form-control" placeholder="Votre Email *" NAME="email" id="email" required data-validation-required-message="Entrez votre adresse mail.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Votre Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                    <textarea class="form-control" placeholder="Votre Message *" id="message" NAME="message" required data-validation-required-message="Please enter a message."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>

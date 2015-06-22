@@ -1,5 +1,7 @@
 package edu.isep.easypark.controller;
-
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -43,15 +45,22 @@ public class UserController {
 		dao2 = (ParkingLotDAOimpl) context.getBean("easyparkDAOpl");
 
 	}
+	
+  
 
 	@RequestMapping(value = "/adduser", method = RequestMethod.POST)
 	public String adduser(User user, UserInformations userinf, Model model) {
 
+		
 		logger.info("inserting user " + user.getEmail() + "firstname : "
 				+ userinf.getFirstname());
+	
+		 
+        System.out.println("MD5 in hex: " + md5(user.getPassword()));
+		user.setPassword(md5(user.getPassword()));
+        
 		int statut = dao.insertUser(user, userinf);
-		logger.info("Inserted user with id :  " + statut);
-
+		
 		model.addAttribute("message",
 				"Votre inscription est terminée, veuillez à présent vous connecter");
 		model.addAttribute("link", "<a href='connexion'>Se connecter</a>");
@@ -87,6 +96,12 @@ public class UserController {
 	@RequestMapping(value = "/page_utilisateur", method = RequestMethod.GET)
 	public String userPage(Model model, HttpSession session, @RequestParam("id_user") int user_id) {
 
+		
+		User user = (User) session.getAttribute("user");
+		if(user_id==user.getId()){
+			model.addAttribute("isMine",true);
+		}
+		
 		UserInformations userInf = new UserInformations();
 		userInf = dao.getUserInf(user_id);
 		
@@ -97,27 +112,18 @@ public class UserController {
 		
 		
 		ParkingLot searchFor = new ParkingLot();
-		searchFor.setAdresse("");
-		searchFor.setId_user(user_id);
 
-		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
+
+		List<ParkingLot> list = dao.fillParkingLot(user_id);
 		model.addAttribute("list", list);
 
 		model.addAttribute("searchFor", searchFor);
 		
 		Commentaires commentaire = new Commentaires();
 		model.addAttribute("commentaire", commentaire);
-				
-		
-
-		
-//		List<Commentaires> list2 = dao.fillCommentaires();
-//		model.addAttribute("list2",list2);
 
 		List<Comment> list2 = dao.fillComment("id_user",user_id);
 		model.addAttribute("list2",list2);
-//		
-		logger.info("aoe");
 		
 		return "page_utilisateur";
 	}
@@ -125,34 +131,42 @@ public class UserController {
 	@RequestMapping(value = "/mon_profil", method = RequestMethod.GET)
 	public String myPage(Model model, HttpSession session) {
 
-		ParkingLot searchFor = new ParkingLot();
-		searchFor.setAdresse("");
-		searchFor.setId_user((Integer) session.getAttribute("id_user"));
-
-		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
-		model.addAttribute("list", list);
-
-		return "mon_profil";
+		int user_id = (Integer) session.getAttribute("id_user");
+		userPage(model,  session, user_id);
+		
+		
+		return "page_utilisateur";
 	}
 	
-	@RequestMapping(value = "/testcom", method = RequestMethod.GET)
-	public String testcom(Model model) {
-		
-//		List<Reservation> list = dao2.fillReservation();
-//		model.addAttribute("list",list);
-		
-//		List<Comment> list2 = dao.fillComment();
-//		model.addAttribute("list2",list2);
-//		
-//		List<ParkingLot> list = dao.fillParkingLot();
-//		model.addAttribute("list", list);
-		
-		return "testcom";
-	}
+
 	
 	public boolean isLoggedIn(){
 		return true;
 	}
 	
+	
+	public static String md5(String input) {
+        
+        String md5 = null;
+         
+        if(null == input) return null;
+         
+        try {
+             
+        //Create MessageDigest object for MD5
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+         
+        //Update input string in message digest
+        digest.update(input.getBytes(), 0, input.length());
+ 
+        //Converts message digest value in base 16 (hex) 
+        md5 = new BigInteger(1, digest.digest()).toString(16);
+ 
+        } catch (NoSuchAlgorithmException e) {
+ 
+            e.printStackTrace();
+        }
+        return md5;
+    }
 	
 }

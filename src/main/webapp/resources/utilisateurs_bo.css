@@ -1,0 +1,37 @@
+@CHARSET "ISO-8859-1";
+
+
+	
+#tableau {
+	
+	min-height: 650px;
+    background-attachment:fixed;
+    background-position: center;  
+    margin-top :3cm;     
+}
+
+
+h2{
+	margin-top: 2cm;
+	text-align:center;
+}
+
+
+.glyphicon{
+	color:#47D1FF;
+}
+
+img {
+	
+	margin-top: 0cm;
+	height:2cm;
+	width: 2cm;
+}
+
+#footer{
+	margin-bottom:0;
+}
+
+.copyright{
+	color:white;
+}

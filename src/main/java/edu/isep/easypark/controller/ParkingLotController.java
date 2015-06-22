@@ -1,9 +1,13 @@
 package edu.isep.easypark.controller;
 
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -87,16 +92,17 @@ public class ParkingLotController {
 	}
 
 	@RequestMapping(value = "/rechercher_place_advance", method = RequestMethod.POST)
-	public String rechercheAvance(Locale locale, Model model,
-			ParkingLot searchFor) {
+	public String rechercheAvance(HttpServletRequest request,Locale locale, Model model) {
 
-		logger.info("Researching for this user : " + searchFor.getId_user());
-		logger.info("Researching at this place : " + searchFor.getAdresse());
+		String adresse = request.getParameter("adresse");
+		String id_user = request.getParameter("id_user");
+		String date = request.getParameter("date");
+		
+		logger.info("Researching for this user : " +adresse);
+		logger.info("Researching at this place : " + id_user);
 
-		ParkingLot searchForNew = new ParkingLot();
-		model.addAttribute("searchFor", searchForNew);
 
-		List<ParkingLot> list = dao.fillParkingLot2(searchFor);
+		List<ParkingLot> list = dao.fillParkingLot2(adresse,date);
 		model.addAttribute("list", list);
 
 		return "rechercher_place";
@@ -120,15 +126,12 @@ public class ParkingLotController {
 		User user = (User) session.getAttribute("user");
 
 		if (user.getId() == parkingLot.getId_user()) {
-
 			model.addAttribute("isMine", true);
 			List<Reservation> list = dao2.fillReservation(id_place);
 			model.addAttribute("list", list);
 		} else {
-			logger.info("not his");
-
 			model.addAttribute("isMine", false);
-			List<Reservation> list = dao2.fillReservation2(id_place);
+			List<Reservation> list = dao2.fillReservation2(id_place, user.getId());
 			model.addAttribute("list", list);
 		}
 
@@ -215,5 +218,6 @@ public class ParkingLotController {
 
 		return "add_disponibilite";
 	}
+
 
 }

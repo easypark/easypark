@@ -20,4 +20,8 @@
 <property name="dataSource" ref="dataSource"/>
 </bean>
 
+<bean id="easyparkDAOplace" class="edu.isep.easypark.PlaceDAOimpl">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+
 </beans>

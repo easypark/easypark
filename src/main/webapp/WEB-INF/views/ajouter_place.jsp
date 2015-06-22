@@ -13,10 +13,41 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	
+	<script type="text/javascript"
+	src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<link href="<c:url value="/resources/ajouter_place1.css" />" rel="stylesheet">
 	
-	
+	<script>
+
+function test(){
+
+    var geocoder = new google.maps.Geocoder();
+
+    var address = $( "#adress" ).val();
+   // var espace = " ";
+  // var ville = $( "#ville" ).val();
+    //var adresse_ville = address+espace+ville
+
+    geocoder.geocode( { 'address': address }, function(results, status) {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+
+    	  $("#lat").val(results[0].geometry.location.lat());
+    	//  $("#myForm").submit();
+    	  $("#longi").val(results[0].geometry.location.lng());
+        $("#myForm").submit();
+
+          return true;
+      }
+
+      else {
+        return false;
+      }
+    });
+
+    }
+
+</script>	
 </head>
 <body>
 
@@ -112,9 +143,13 @@
 				</ul>
 			</div>
 
+	<input type="hidden" id="lat" NAME="latitude" VALUE="0" >
+			<input type="hidden" ID="longi" NAME="longitude" VALUE="0" >
+			<input type="hidden" ID="id_user" NAME="id_user" VALUE="0" >
+
 			<div>
 				 
-				<button type="submit" class="btn btn-info btn-md">Valider</button>
+				<button onClick="return test()" type="submit" class="btn btn-info btn-md">Valider</button>
 				<button type="reset" class="btn btn-info btn-md">Retourner à l'étape précédente</button>
 					
 			</div>

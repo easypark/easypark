@@ -9,7 +9,7 @@ public class User implements Serializable{
 	int id;
 	String email;
 	String password;
-
+	String role;
 	
 	
 	
@@ -36,6 +36,12 @@ public class User implements Serializable{
 		
 		
 		return true;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }

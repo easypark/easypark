@@ -45,8 +45,6 @@
  
 			</c:forEach>
 
-
-
  
  </tbody>
  </table>
@@ -60,7 +58,7 @@
  Petit Formulaire de recherche
  
  <form action="rechercher_place_advance" method="POST">
-<!--  Horaires : <input NAME = "horaires" TYPE ="text"  > -->
+ Date : <input NAME = "date" TYPE ="text"  >
  Adresse : <input NAME="adresse" TYPE="text">
  Id User : <input NAME="id_user" TYPE="text">
 	

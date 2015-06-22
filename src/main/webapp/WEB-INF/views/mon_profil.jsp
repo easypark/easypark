@@ -10,6 +10,8 @@
 <title>Page personnelle</title>
 </head>
 <body>
+<%@include file="header.jsp" %>
+
 <h1>Mon Profil</h1>
 <%= session.getAttribute( "id_user" ) %>
 <%= session.getAttribute( "email" ) %>
@@ -22,24 +24,21 @@ Mes Places : <br>
 		<thead>
 			<tr>
 				<th>nom</th>
-				<th>ville</th>
-				<th>commentaire</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="record" items="${list}">
-				<tr>
-					<tr>
-					<td>${record.nom}</td>
-					<td>${record.ville}</td>
-					<td>${record.commentaire}</td>
-				</tr>
-				
- 
-			</c:forEach>
+	<table>
+  <c:forEach items="${list}" var="item">
+    <tr>
+      <td><c:out value="${item}" /></td>
+    </tr>
+  </c:forEach>
+</table>
 
  
  </tbody>
  </table>
+ 
+<%--  <%@include file="footer.jsp" %> --%>
 </body>
 </html>

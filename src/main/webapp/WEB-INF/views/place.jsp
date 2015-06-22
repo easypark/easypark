@@ -11,6 +11,7 @@
 <link href="<c:url value="/resources/jquery.timepicker.min.css" />"
 	rel="stylesheet" type="text/css" media="screen" />
 
+
 <script src="<c:url value="/resources/js/lib/moment.min.js"/>"></script>
 <script src="<c:url value="/resources/js/lib/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/fullcalendar.min.js"/>"></script>
@@ -18,6 +19,13 @@
 <script src="<c:url value="/resources/js/jquery.timepicker.min.js"/>"></script>
 <script src="<c:url value="/resources/js/reservationCal.js"/>"></script>
 <script>
+
+// 						Dialog box
+
+// <link href="<c:url value="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />"
+// 	rel="stylesheet" type="text/css" media="screen" />
+<!-- <script src="<c:url value="http://code.jquery.com/jquery-1.10.2.js"/>"></script> -->
+<%-- <script src="<c:url value="http://code.jquery.com/ui/1.11.4/jquery-ui.js"/>"></script> --%>
 
 <%out.println(" var day = new Array();");
 			out.println("	$(document).ready(function() {");%>
@@ -39,6 +47,8 @@
 
 
 </c:forEach>
+
+
 
 
 $(document).ready(function(){
@@ -92,8 +102,8 @@ $(document).ready(function(){
 			    
 
 			dayClick: function(date, jsEvent, view) {
-				
-				dayClickMine(date,jsEvent,view);
+				 
+				dayClickMine(date,jsEvent,view,${id_place});
 
 		    },
 			    eventClick: function(event, element) {
@@ -130,7 +140,7 @@ $(document).ready(function(){
 </head>
 <body>
 
-	Id Place${id_place}
+	Id Place ${id_place}
 	 Nom Place ${place.nom} <br>Ville Place ${place.ville } <br>Place Adresse ${place.adresse } <br>Place Superficie ${place.superficie }<br>
 	<form action="add_commentaire2" method="POST">
 		<input type="text" NAME="content" /> <input style="display: none"
@@ -200,6 +210,7 @@ $(document).ready(function(){
 	</c:choose>
 
 
+</div>
 
 </body>
 </html>

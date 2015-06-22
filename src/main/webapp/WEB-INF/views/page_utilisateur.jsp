@@ -24,10 +24,13 @@
 
 </head>
 <body>
+<%@include file="header.jsp" %>
 <h1>Profil de :</h1>
 ${user_id}
 ${userInf.name}
 ${userInf.firstname}
+
+${isMine}
 
 <br>
 Informations:

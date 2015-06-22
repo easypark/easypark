@@ -1,4 +1,4 @@
-package edu.isep.easypark;
+	package edu.isep.easypark;
 
 
 	import java.util.List;
@@ -40,10 +40,10 @@ import edu.isep.easypark.model.Reservation;
 
 		}
 
-		public List<Reservation> fillReservation2(int id_place) {
-			String sql = "select * from reservation where status = 'free' and id_place = ? ";
+		public List<Reservation> fillReservation2(int id_place, int user_id) {
+			String sql = "select * from reservation where (status = 'free' or id_user = ?) and id_place = ?";
 			return this.jdbcTemplate
-					.query(sql,new Object[] {id_place}	,new BeanPropertyRowMapper<Reservation>(
+					.query(sql,new Object[] {user_id,id_place}	,new BeanPropertyRowMapper<Reservation>(
 									Reservation.class));
 		}
 		

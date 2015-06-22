@@ -1,0 +1,63 @@
+@CHARSET "ISO-8859-1";
+
+    body {
+        background: #252525;
+        font-family: 'Open Sans';
+        font-weight: 300;
+    }
+    
+    .glyphicon{
+	color:#47D1FF;
+}
+    
+    
+    .main {
+        background: white url(images/parkingco.jpg) right top no-repeat;
+        background-size: contain;
+        padding: 80px 40px 20px;
+        margin-top: 100px;
+    }
+    
+    @media only screen and (max-width : 992px) {
+        .main {
+            background: white;
+            margin-top: 30px;
+        }
+    }
+    
+    h1 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        color: #555;
+        margin-bottom: 20;
+    }
+    
+    h2 {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        color: #999;
+        font-size: 18px;
+        margin-top: 5px;
+    }
+    
+    form {
+        margin-top: 40px;
+    }
+    
+    input.form-control , input[type="submit"] , .btn {
+        border-radius: 0px;
+    }
+    
+    .btn {
+        transition: all ease-in-out 0.2s;
+    }
+    
+    .credits {
+        margin-top:30px;
+        color: #999;
+        font-size: 14px;
+    }
+    
+    .credits a {
+        color: inherit;
+    }
